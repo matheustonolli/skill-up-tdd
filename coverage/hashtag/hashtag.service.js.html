@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">87.17% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>39/39</span>
+                <span class='fraction'>34/39</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">86.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>18/18</span>
+                <span class='fraction'>13/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">87.17% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>39/39</span>
+                <span class='fraction'>34/39</span>
             </div>
         
             
@@ -102,18 +102,18 @@
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
 <a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -124,22 +124,22 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">export const createHashtag = async (data, HashtagModel) =&gt; {
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const createHashtag = async (data, HashtagModel) =&gt; {
   const { name, videoId } = data;
 &nbsp;
   if (!name || name.trim() === '') throw new Error('O nome da hashtag não pode estar vazio.');
@@ -148,7 +148,7 @@
 &nbsp;
   if (cleanName.length &gt; 100) throw new Error('A hashtag deve ter no máximo 100 caracteres.');
   if (/\s/.test(cleanName)) throw new Error('A hashtag não pode conter espaços.');
-  if (!videoId) throw new Error('Vídeo não informado.');
+  if (!videoId) <span class="branch-0 cbranch-no" title="branch not covered" >throw new Error('Vídeo não informado.');</span>
 &nbsp;
   const existing = await HashtagModel.findOne({ where: { name: cleanName } });
   if (existing) throw new Error('Essa hashtag já existe.');
@@ -162,7 +162,7 @@
 };
 &nbsp;
 export const deleteHashtag = async (hashtagId, HashtagModel) =&gt; {
-  if (!hashtagId) throw new Error('Hashtag não informada.');
+  if (!hashtagId) <span class="branch-0 cbranch-no" title="branch not covered" >throw new Error('Hashtag não informada.');</span>
 &nbsp;
   const hashtag = await HashtagModel.findOne({ where: { id: hashtagId } });
   if (!hashtag) throw new Error('Hashtag não encontrada.');
@@ -172,19 +172,19 @@ export const deleteHashtag = async (hashtagId, HashtagModel) =&gt; {
   return { message: 'Hashtag removida com sucesso!' };
 };
 &nbsp;
-export const listHashtagsByVideo = async (videoId, HashtagModel) =&gt; {
-  if (!videoId) throw new Error('Vídeo não informado.');
-&nbsp;
-  const hashtags = await HashtagModel.findAll({ where: { videoId } });
-  return { hashtags };
-};</pre></td></tr></table></pre>
+export const listHashtagsByVideo = <span class="fstat-no" title="function not covered" >async (videoId, HashtagModel) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  if (!videoId) throw new Error('Vídeo não informado.');</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  const hashtags = await HashtagModel.findAll({ where: { videoId } });</span>
+<span class="cstat-no" title="statement not covered" >  return { hashtags };</span>
+<span class="cstat-no" title="statement not covered" >};</span></pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-06-02T13:30:34.590Z
+                at 2026-06-02T16:23:33.550Z
             </div>
         <script src="../prettify.js"></script>
         <script>

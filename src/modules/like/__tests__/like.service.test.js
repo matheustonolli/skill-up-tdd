@@ -41,6 +41,12 @@ describe('Like Service', () => {
       expect(result.liked).toBe(false);
       expect(result.message).toBe('Like removido.');
     });
+
+    it('deve lançar erro se userId não for informado', async () => {
+      await expect(
+        likeService.toggleLike({ videoId: 1 }, mockLikeModel)
+      ).rejects.toThrow('Usuário não autenticado.');
+    });
   });
 
   describe('countLikes()', () => {
@@ -51,6 +57,12 @@ describe('Like Service', () => {
 
       expect(result.total).toBe(42);
       expect(result.videoId).toBe(1);
+    });
+
+    it('deve lançar erro se videoId não for informado', async () => {
+      await expect(
+        likeService.countLikes(null, mockLikeModel)
+      ).rejects.toThrow('Vídeo não informado.');
     });
   });
 });

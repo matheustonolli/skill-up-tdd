@@ -42,6 +42,12 @@ describe('SavedVideo Service', () => {
       expect(result.message).toBe('Vídeo removido dos salvos com sucesso!');
     });
 
+    it('deve lançar erro se userId não for informado', async () => {
+      await expect(
+        savedVideoService.unsaveVideo({ videoId: 1 }, mockSavedVideoModel)
+      ).rejects.toThrow('Usuário não autenticado.');
+    });
+
     it('deve lançar erro se o vídeo não estiver nos salvos', async () => {
       mockSavedVideoModel.findOne.mockResolvedValueOnce(null);
 
@@ -60,6 +66,12 @@ describe('SavedVideo Service', () => {
 
       const result = await savedVideoService.listSavedVideos(1, mockSavedVideoModel);
       expect(result.savedVideos).toHaveLength(2);
+    });
+
+    it('deve lançar erro se userId não for informado', async () => {
+      await expect(
+        savedVideoService.listSavedVideos(null, mockSavedVideoModel)
+      ).rejects.toThrow('Usuário não autenticado.');
     });
   });
 });
