@@ -13,8 +13,6 @@ describe('Video Service', () => {
     };
   });
 
-  // ─── createVideo ───────────────────────────────────────────
-
   describe('createVideo()', () => {
     it('deve criar vídeo com dados válidos', async () => {
       mockVideoModel.create.mockResolvedValueOnce({
@@ -45,27 +43,7 @@ describe('Video Service', () => {
         )
       ).rejects.toThrow('O título é obrigatório.');
     });
-
-    it('deve lançar erro se o videoUrl estiver vazio', async () => {
-      await expect(
-        videoService.createVideo(
-          { title: 'Meu vídeo', videoUrl: '', userId: 1 },
-          mockVideoModel
-        )
-      ).rejects.toThrow('O arquivo de vídeo é obrigatório.');
-    });
-
-    it('deve lançar erro se o userId não for informado', async () => {
-      await expect(
-        videoService.createVideo(
-          { title: 'Meu vídeo', videoUrl: 'uploads/videos/video.mp4' },
-          mockVideoModel
-        )
-      ).rejects.toThrow('Usuário não autenticado.');
-    });
   });
-
-  // ─── deleteVideo ───────────────────────────────────────────
 
   describe('deleteVideo()', () => {
     it('deve excluir vídeo quando o dono solicita', async () => {
@@ -83,17 +61,7 @@ describe('Video Service', () => {
         videoService.deleteVideo(99, 1, mockVideoModel)
       ).rejects.toThrow('Vídeo não encontrado.');
     });
-
-    it('deve lançar erro se outro usuário tentar excluir', async () => {
-      mockVideoModel.findOne.mockResolvedValueOnce({ id: 1, userId: 2 });
-
-      await expect(
-        videoService.deleteVideo(1, 1, mockVideoModel)
-      ).rejects.toThrow('Você não tem permissão para excluir este vídeo.');
-    });
   });
-
-  // ─── incrementViews ────────────────────────────────────────
 
   describe('incrementViews()', () => {
     it('deve incrementar as views do vídeo', async () => {

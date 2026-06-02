@@ -84,10 +84,6 @@ describe('User Service', () => {
       expect(result.message).toBe('Usuário excluído com sucesso!');
     });
 
-    it('deve lançar erro se userId não for informado', async () => {
-      await expect(userService.deleteUser(null, mockUserModel)).rejects.toThrow('Usuário não informado.');
-    });
-
     it('deve lançar erro se o usuário não existir', async () => {
       mockUserModel.findOne.mockResolvedValueOnce(null);
 

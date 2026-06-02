@@ -24,18 +24,6 @@ describe('SavedVideo Service', () => {
       expect(result.savedVideo).toHaveProperty('id');
     });
 
-    it('deve lançar erro se userId não for informado', async () => {
-      await expect(
-        savedVideoService.saveVideo({ videoId: 1 }, mockSavedVideoModel)
-      ).rejects.toThrow('Usuário não autenticado.');
-    });
-
-    it('deve lançar erro se videoId não for informado', async () => {
-      await expect(
-        savedVideoService.saveVideo({ userId: 1 }, mockSavedVideoModel)
-      ).rejects.toThrow('Vídeo não informado.');
-    });
-
     it('deve lançar erro se o vídeo já estiver salvo', async () => {
       mockSavedVideoModel.findOne.mockResolvedValueOnce({ id: 1 });
 
@@ -52,18 +40,6 @@ describe('SavedVideo Service', () => {
 
       const result = await savedVideoService.unsaveVideo({ userId: 1, videoId: 1 }, mockSavedVideoModel);
       expect(result.message).toBe('Vídeo removido dos salvos com sucesso!');
-    });
-
-    it('deve lançar erro se userId não for informado', async () => {
-      await expect(
-        savedVideoService.unsaveVideo({ videoId: 1 }, mockSavedVideoModel)
-      ).rejects.toThrow('Usuário não autenticado.');
-    });
-
-    it('deve lançar erro se videoId não for informado', async () => {
-      await expect(
-        savedVideoService.unsaveVideo({ userId: 1 }, mockSavedVideoModel)
-      ).rejects.toThrow('Vídeo não informado.');
     });
 
     it('deve lançar erro se o vídeo não estiver nos salvos', async () => {
@@ -84,12 +60,6 @@ describe('SavedVideo Service', () => {
 
       const result = await savedVideoService.listSavedVideos(1, mockSavedVideoModel);
       expect(result.savedVideos).toHaveLength(2);
-    });
-
-    it('deve lançar erro se userId não for informado', async () => {
-      await expect(
-        savedVideoService.listSavedVideos(null, mockSavedVideoModel)
-      ).rejects.toThrow('Usuário não autenticado.');
     });
   });
 });

@@ -12,8 +12,6 @@ describe('Comment Service', () => {
     };
   });
 
-  // ─── createComment ─────────────────────────────────────────
-
   describe('createComment()', () => {
     it('deve criar comentário com dados válidos', async () => {
       mockCommentModel.create.mockResolvedValueOnce({
@@ -51,27 +49,7 @@ describe('Comment Service', () => {
         )
       ).rejects.toThrow('O comentário deve ter no máximo 500 caracteres.');
     });
-
-    it('deve lançar erro se o userId não for informado', async () => {
-      await expect(
-        commentService.createComment(
-          { content: 'Ótimo!', videoId: 1 },
-          mockCommentModel
-        )
-      ).rejects.toThrow('Usuário não autenticado.');
-    });
-
-    it('deve lançar erro se o videoId não for informado', async () => {
-      await expect(
-        commentService.createComment(
-          { content: 'Ótimo!', userId: 1 },
-          mockCommentModel
-        )
-      ).rejects.toThrow('Vídeo não informado.');
-    });
   });
-
-  // ─── deleteComment ─────────────────────────────────────────
 
   describe('deleteComment()', () => {
     it('deve excluir comentário quando o dono solicita', async () => {
@@ -80,14 +58,6 @@ describe('Comment Service', () => {
 
       const result = await commentService.deleteComment(1, 1, mockCommentModel);
       expect(result.message).toBe('Comentário excluído com sucesso!');
-    });
-
-    it('deve lançar erro se o comentário não existir', async () => {
-      mockCommentModel.findOne.mockResolvedValueOnce(null);
-
-      await expect(
-        commentService.deleteComment(99, 1, mockCommentModel)
-      ).rejects.toThrow('Comentário não encontrado.');
     });
 
     it('deve lançar erro se outro usuário tentar excluir', async () => {

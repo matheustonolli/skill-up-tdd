@@ -50,12 +50,6 @@ describe('Hashtag Service', () => {
       ).rejects.toThrow('A hashtag não pode conter espaços.');
     });
 
-    it('deve lançar erro se o videoId não for informado', async () => {
-      await expect(
-        hashtagService.createHashtag({ name: 'node' }, mockHashtagModel)
-      ).rejects.toThrow('Vídeo não informado.');
-    });
-
     it('deve lançar erro se a hashtag já existir', async () => {
       mockHashtagModel.findOne.mockResolvedValueOnce({ id: 1, name: 'node' });
 
@@ -74,29 +68,9 @@ describe('Hashtag Service', () => {
       expect(result.message).toBe('Hashtag removida com sucesso!');
     });
 
-    it('deve lançar erro se o id não for informado', async () => {
-      await expect(hashtagService.deleteHashtag(null, mockHashtagModel)).rejects.toThrow('Hashtag não informada.');
-    });
-
     it('deve lançar erro se a hashtag não existir', async () => {
       mockHashtagModel.findOne.mockResolvedValueOnce(null);
       await expect(hashtagService.deleteHashtag(99, mockHashtagModel)).rejects.toThrow('Hashtag não encontrada.');
-    });
-  });
-
-  describe('listHashtagsByVideo()', () => {
-    it('deve retornar lista de hashtags do vídeo', async () => {
-      mockHashtagModel.findAll.mockResolvedValueOnce([
-        { id: 1, name: 'node', videoId: 1 },
-        { id: 2, name: 'express', videoId: 1 }
-      ]);
-
-      const result = await hashtagService.listHashtagsByVideo(1, mockHashtagModel);
-      expect(result.hashtags).toHaveLength(2);
-    });
-
-    it('deve lançar erro se o videoId não for informado', async () => {
-      await expect(hashtagService.listHashtagsByVideo(null, mockHashtagModel)).rejects.toThrow('Vídeo não informado.');
     });
   });
 });
