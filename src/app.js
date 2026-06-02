@@ -5,7 +5,6 @@ import logger from 'morgan';
 import session from 'express-session';
 import flash from 'connect-flash';
 import expressLayouts from 'express-ejs-layouts';
-import userRoutes from './modules/user/user.routes.js';
 import userRoutes    from './modules/user/user.routes.js';
 import videoRoutes   from './modules/video/video.routes.js';
 import commentRoutes from './modules/comment/comment.routes.js';
